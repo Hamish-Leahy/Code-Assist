@@ -1,0 +1,24 @@
+sample data
+with dataset (raw_data) as (
+    values '{"label": "XXX", "lines":[{"amount":1000, "category": "A"}, {"amount":100, "category": "B"}, {"amount":10, "category": "C"}]}'
+)
+
+-- query
+select label,
+    transform(lines, l -> l['amount']) amount,
+    transform(lines, l -> l['category']) category
+from (
+    select JSON_EXTRACT(raw_data, '$.label') AS label,
+        cast(JSON_EXTRACT(raw_data, '$.lines') as array(map(varchar, json))) lines
+    from dataset
+);
+Output:
+
+label	amount	category
+XXX	[1000, 100, 10]	["A", "B", "C"]
+
+-- query
+select JSON_EXTRACT(raw_data, '$.label') label,
+       JSON_QUERY(raw_data, 'lax $.lines[*].amount' WITH ARRAY WRAPPER) amount,
+       JSON_QUERY(raw_data, 'lax $.lines[*].category' WITH ARRAY WRAPPER) category
+from dataset;
