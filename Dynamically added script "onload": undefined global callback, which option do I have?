@@ -1,0 +1,10 @@
+(function(document, tag) {
+    var script = document.createElement(tag),
+        el = document.getElementsByTagName(tag)[0];
+    script.src = 'https://unpkg.com/@hotwired/stimulus@3.1.0/dist/stimulus.umd.js';
+    script.onload = function () {
+        window.initControllers();
+    };
+
+    el.parentNode.insertBefore(script, el);
+}(document, 'script'));
