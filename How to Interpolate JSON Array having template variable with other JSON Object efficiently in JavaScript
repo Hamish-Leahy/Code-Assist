@@ -1,0 +1,44 @@
+template = [
+  {
+    title: "Student 1",
+    records: [
+      { key: "Roll No", value: "${student1.rollNo}" },
+      { key: "Class", value: "${student1.class} standard" },
+    ],
+  },
+    {
+    title: "Student 2",
+    records: [
+      { key: "Roll No", value: "${student2.rollNo}" },
+      { key: "Class", value: "${student2.class} standard" },
+    ]
+  }
+];
+
+replacers={
+   student1:{
+      rollNo:100,
+      class:10
+   },
+   student2:{
+      rollNo:101,
+      class:12
+   }
+}
+
+template=[
+  {
+    title: "Student 1",
+    records: [
+      { key: "Roll No", value: "100" },
+      { key: "Class", value: "10 standard" }
+    ],
+  },
+    {
+    title: "Student 2",
+    records: [
+      { key: "Roll No", value: "101" },
+      { key: "Class", value: "12 standard" }
+    ]
+  }
+];
