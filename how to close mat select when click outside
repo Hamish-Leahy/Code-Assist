@@ -1,0 +1,26 @@
+
+html
+
+<mat-form-field appearance="fill">
+  <mat-label>Input & change events</mat-label>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    (blur)="blur()"
+    (dateChange)="blur()"
+  />
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <mat-select (blur)="blur()" placeholder="Fav Animal">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Copyright 2022 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at https://angular.io/license -->
