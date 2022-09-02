@@ -1,0 +1,15 @@
+function onEdit(e) {
+  const as = e.source.getActiveSheet();
+  
+  const ts = e.source.getSheetByName("overview");
+  const cell = e.range.getA1Notation();
+  
+  const triggerCells = ["A5","B3","C2"];
+  
+ 
+ if (as.getName() == "work" && triggerCells.includes(cell)){
+    let b = as.getRange("B1").getValue();
+    ts.getRange("C5").setValue(b);
+  }
+
+}
