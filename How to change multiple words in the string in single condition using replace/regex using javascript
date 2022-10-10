@@ -1,0 +1,8 @@
+let str= ['40 CROSS STREET', '2 THIRD ROAD AVENUE','34 AMWAY AVE'] 
+function getResult(str) { var result = 
+str.toLowerCase().replace(/\b\w/g, val =>
+v'al.toUpperCase())
+.replaceAll('/street/', 'St '
+).replaceAll('/avenue/', 'Ave') return result; }
+str.forEach(s =>{ console
+.log(getResult(s)) })
