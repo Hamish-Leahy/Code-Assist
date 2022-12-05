@@ -1,4 +1,4 @@
-let str= ['40 CROSS STREET', '2 THIRD ROAD AVENUE','34 AMWAY AVE'] 
+let str= ['902 castledoyle', 'RD','Armidale, NSW, 2350'] 
 function getResult(str) { var result = 
 str.toLowerCase().replace(/\b\w/g, val =>
 v'al.toUpperCase())
