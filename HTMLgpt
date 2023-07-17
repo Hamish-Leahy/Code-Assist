@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatGPT Integration</title>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button id="send-button">Send</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var chatLog = $('#chat-log');
+            var userInput = $('#user-input');
+            var sendButton = $('#send-button');
+
+            // Function to add a message to the chat log
+            function appendMessage(sender, message) {
+                chatLog.append('<p><strong>' + sender + ':</strong> ' + message + '</p>');
+            }
+
+            // Function to handle user input
+            function handleUserInput() {
+                var userMessage = userInput.val();
+                appendMessage('You', userMessage);
+                userInput.val('');
+
+                // Make a request to the OpenAI API
+                $.ajax({
+                    url: 'https://api.openai.com/v1/engines/davinci-codex/completions',
+                    headers: {
+                        'Authorization': 'Bearer YOUR_API_KEY',
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'POST',
+                    data: JSON.stringify({
+                        'prompt': userMessage,
+                        'max_tokens': 50
+                    }),
+                    success: function(data) {
+                        var chatGptResponse = data.choices[0].text.trim();
+                        appendMessage('ChatGPT', chatGptResponse);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        appendMessage('Error', 'An error occurred while processing your request.');
+                    }
+                });
+            }
+
+            // Event listener for the send button
+            sendButton.on('click', function() {
+                handleUserInput();
+            });
+
+            // Event listener for the Enter key
+            userInput.on('keypress', function(e) {
+                if (e.keyCode === 13) {
+                    handleUserInput();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
